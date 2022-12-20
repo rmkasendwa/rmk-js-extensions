@@ -17,7 +17,7 @@ yarn add @infinite-debugger/rmk-js-extensions
 Here is a quick example to get you started, **it's all you need**:
 
 ```ts
-import * from '@infinite-debugger/rmk-js-extensions/String';
+import '@infinite-debugger/rmk-js-extensions/String';
 ```
 
 ## Contributing
