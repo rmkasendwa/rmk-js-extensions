@@ -1,18 +1,18 @@
 {
   "name": "@infinite-debugger/rmk-js-extensions",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.4",
   "description": "RMK Utils is a library of utility functions",
   "keywords": [
     "node",
     "javascript"
   ],
-  "homepage": "https://github.com/rmkasendwa/rmk-utils#readme",
+  "homepage": "https://github.com/rmkasendwa/rmk-js-extensions#readme",
   "bugs": {
-    "url": "https://github.com/rmkasendwa/rmk-utils/issues"
+    "url": "https://github.com/rmkasendwa/rmk-js-extensions/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rmkasendwa/rmk-utils.git"
+    "url": "git+https://github.com/rmkasendwa/rmk-js-extensions.git"
   },
   "license": "MIT",
   "author": "Ronald M. Kasendwa",

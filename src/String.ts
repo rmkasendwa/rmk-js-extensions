@@ -19,7 +19,8 @@ declare global {
     reverse: () => string;
     hyphenatePascal: () => string;
     titleCasePascal: () => string;
-    toCamelCase: (from: 'HYPHENATED' | 'UPPER_CASE') => string;
+    toCamelCase: () => string;
+    toPascalCase: () => string;
     replaceAt: (
       startIndex?: number,
       replacement?: string,
@@ -167,20 +168,27 @@ String.prototype.titleCasePascal = function () {
   return result;
 };
 
-String.prototype.toCamelCase = function (from) {
-  let string = String(this);
-  switch (from) {
-    case 'HYPHENATED':
-      string = string
-        .split('-')
-        .map((subString) => subString.toTitleCase())
-        .join('');
-      break;
-    case 'UPPER_CASE':
-      string = string.toTitleCase(true).replace(/\s/g, '');
-      break;
-  }
-  return string.charAt(0).toLowerCase() + string.substr(1);
+/**
+ * Converts string to PascalCase
+ */
+String.prototype.toPascalCase = function () {
+  return String(this)
+    .replace(/[^\w\-_\s]/g, '')
+    .replace(/[\-_]+/g, ' ')
+    .trim()
+    .split(/\s/g)
+    .map((string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    })
+    .join('');
+};
+
+/**
+ * Converts string to camelCase.
+ */
+String.prototype.toCamelCase = function () {
+  const pascalCaseString = this.toPascalCase();
+  return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
 };
 
 String.prototype.replaceAt = function (
