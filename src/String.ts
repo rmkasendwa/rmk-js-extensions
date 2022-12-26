@@ -19,8 +19,9 @@ declare global {
     reverse: () => string;
     hyphenatePascal: () => string;
     titleCasePascal: () => string;
-    toCamelCase: () => string;
+    toKebabCase: () => string;
     toPascalCase: () => string;
+    toCamelCase: () => string;
     replaceAt: (
       startIndex?: number,
       replacement?: string,
@@ -44,7 +45,7 @@ String.prototype.toTitleCase = function (isUnderscoreSeparated) {
   words.forEach((word, index) => {
     !(isUnderscoreSeparated || word.toUpperCase() !== word) ||
       (words[index] = word.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
       }));
   });
   return words.join(' ');
@@ -100,7 +101,7 @@ String.prototype.chunk = function (config, indexChunkLength) {
       }
     }
     chunkedOutput = chunkedOutput.map((currentChunckLength, index) => {
-      return string.substr(
+      return string.substring(
         index > 0
           ? chunkedOutput.slice(0, index).reduce((a: number, b: number) => {
               return a + b;
@@ -111,7 +112,7 @@ String.prototype.chunk = function (config, indexChunkLength) {
     });
   } else if (typeof config === 'object' && config.chunkLength) {
     do {
-      chunkedOutput.push(chunkDigest.substr(0, config.chunkLength));
+      chunkedOutput.push(chunkDigest.substring(0, config.chunkLength));
       chunkDigest = chunkDigest.substring(config.chunkLength);
     } while (chunkDigest.length > 0);
   }
@@ -191,6 +192,18 @@ String.prototype.toCamelCase = function () {
   return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
 };
 
+/**
+ * Converts string to kebab-case.
+ */
+String.prototype.toKebabCase = function () {
+  return String(this)
+    .replace(/[^\w\-_\s]/g, '')
+    .replace(/[\-_]+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+};
+
 String.prototype.replaceAt = function (
   startIndex = 0,
   replacement = '',
@@ -200,14 +213,14 @@ String.prototype.replaceAt = function (
   const replacementLength =
     typeof replacement === 'number' ? replacement : replacement.length;
   return (
-    this.substr(0, startIndex) +
+    this.substring(0, startIndex) +
     replacementString +
-    this.substr(endIndex || startIndex + replacementLength)
+    this.substring(endIndex || startIndex + replacementLength)
   );
 };
 
 String.prototype.insertAt = function (index = 0, insertion = '') {
-  return this.substr(0, index) + insertion + this.substr(index);
+  return this.substring(0, index) + insertion + this.substring(index);
 };
 
 String.prototype.trimIndent = function () {
