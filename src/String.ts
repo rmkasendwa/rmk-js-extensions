@@ -19,6 +19,7 @@ declare global {
     reverse: () => string;
     hyphenatePascal: () => string;
     titleCasePascal: () => string;
+    toSentenceCase: () => string;
     toKebabCase: () => string;
     toPascalCase: () => string;
     toCamelCase: () => string;
@@ -182,6 +183,19 @@ String.prototype.toPascalCase = function () {
       return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     })
     .join('');
+};
+
+/**
+ * Converts string to Sentence case.
+ */
+String.prototype.toSentenceCase = function () {
+  return String(this)
+    .split(/\.\s*/g)
+    .map((string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    })
+    .join('. ')
+    .replace(/\s\./g, '.');
 };
 
 /**
