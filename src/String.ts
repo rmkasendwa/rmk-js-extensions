@@ -174,15 +174,42 @@ String.prototype.titleCasePascal = function () {
  * Converts string to PascalCase
  */
 String.prototype.toPascalCase = function () {
-  return String(this)
+  const inputString = String(this)
     .replace(/[^\w\-_\s]/g, '')
-    .replace(/[\-_]+/g, ' ')
+    .replace(/[\-_]+/g, ' ');
+
+  // Check if string is already pascal case
+  if (!inputString.match(/\s+/g) && inputString.match(/^[A-Z]/g)) {
+    return inputString;
+  }
+
+  return inputString
     .trim()
     .split(/\s/g)
     .map((string) => {
       return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     })
     .join('');
+};
+
+/**
+ * Converts string to camelCase.
+ */
+String.prototype.toCamelCase = function () {
+  const inputString = String(this)
+    .replace(/[^\w\-_\s]/g, '')
+    .replace(/[\-_]+/g, ' ');
+
+  // Check if string is already camel case
+  if (!inputString.match(/\s+/g)) {
+    if (inputString.match(/^[a-z]/g)) {
+      return inputString;
+    }
+    return inputString.toLowerCase();
+  }
+
+  const pascalCaseString = inputString.toPascalCase();
+  return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
 };
 
 /**
@@ -196,14 +223,6 @@ String.prototype.toSentenceCase = function () {
     })
     .join('. ')
     .replace(/\s\./g, '.');
-};
-
-/**
- * Converts string to camelCase.
- */
-String.prototype.toCamelCase = function () {
-  const pascalCaseString = this.toPascalCase();
-  return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
 };
 
 /**
