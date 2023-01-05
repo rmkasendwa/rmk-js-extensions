@@ -17,8 +17,6 @@ declare global {
       indexChunkLength?: number
     ) => string | string[] | number | number[];
     reverse: () => string;
-    hyphenatePascal: () => string;
-    titleCasePascal: () => string;
     toSentenceCase: () => string;
     toKebabCase: () => string;
     toPascalCase: () => string;
@@ -125,51 +123,6 @@ String.prototype.reverse = function () {
   return this.split('').reverse().join('');
 };
 
-String.prototype.hyphenatePascal = function () {
-  if (this.toUpperCase() === this.toString()) return this.toLowerCase();
-  return this.replace(/[A-Z]+/g, (upperCaseCharacters) => {
-    if (upperCaseCharacters.length > 1) {
-      if (upperCaseCharacters.length === 2)
-        return (
-          upperCaseCharacters.charAt(0) +
-          upperCaseCharacters.charAt(1).toLowerCase()
-        );
-      return (
-        upperCaseCharacters.charAt(0) +
-        upperCaseCharacters
-          .substring(1, upperCaseCharacters.length - 1)
-          .toLowerCase() +
-        upperCaseCharacters.charAt(upperCaseCharacters.length - 1)
-      );
-    }
-    return upperCaseCharacters;
-  }).replace(
-    /[A-Z]/g,
-    (upperCaseCharacters, offset) =>
-      (offset > 0 ? '-' : '') + upperCaseCharacters.toLowerCase()
-  );
-};
-
-String.prototype.titleCasePascal = function () {
-  const inputString = String(this);
-  if (inputString.toUpperCase() === inputString) return inputString;
-  const result = inputString
-    .replace(/[A-Z]/g, function (upperCaseCharacters, offset) {
-      return (offset > 0 ? ' ' : '') + upperCaseCharacters;
-    })
-    .toTitleCase()
-    .trim() // Small change here
-    .replace(/\s{2,}/, ' '); // And here (and the next whole IF)
-
-  // Note: When safari starts supporting look forward and behind,
-  // we can use
-  //  .replace(/(?<=\b[A-Z])\s(?=[A-Z]\b)/g, "");
-  if (result.length === 3 && result[1] === ' ') {
-    return result.split(' ').join('');
-  }
-  return result;
-};
-
 /**
  * Converts string to PascalCase
  */
@@ -185,8 +138,11 @@ String.prototype.toPascalCase = function () {
 
   return inputString
     .trim()
-    .split(/\s/g)
+    .split(/\s+/g)
     .map((string) => {
+      if (string.match(/^[A-Z]+$/g)) {
+        return string;
+      }
       return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     })
     .join('');
@@ -208,7 +164,16 @@ String.prototype.toCamelCase = function () {
     return inputString.toLowerCase();
   }
 
-  const pascalCaseString = inputString.toPascalCase();
+  const pascalCaseString = inputString
+    .split(/\s+/g)
+    .map((string, index) => {
+      if (string.match(/^[A-Z]+$/g) && index === 0) {
+        return string.toLowerCase();
+      }
+      return string;
+    })
+    .join(' ')
+    .toPascalCase();
   return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
 };
 
