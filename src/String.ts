@@ -222,8 +222,19 @@ String.prototype.insertAt = function (index = 0, insertion = '') {
 };
 
 String.prototype.trimIndent = function () {
+  const minIndent = this.trim()
+    .split('\n')
+    .reduce((minIndent, line) => {
+      const lineIndent = line.match(/^(\s*)/)?.[0].length || 0;
+      return lineIndent > 0 && lineIndent < minIndent ? lineIndent : minIndent;
+    }, Infinity);
   return this.trim()
     .split('\n')
-    .map((string) => string.trimStart())
+    .map((line) => {
+      if (line.trim().length > 0) {
+        return line.replace(new RegExp(`^\\s{${minIndent}}`), '');
+      }
+      return line;
+    })
     .join('\n');
 };
