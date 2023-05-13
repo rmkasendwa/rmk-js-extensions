@@ -131,9 +131,17 @@ String.prototype.toPascalCase = function () {
     .replace(/[^\w\-_\s]/g, '')
     .replace(/[\-_]+/g, ' ');
 
-  // Check if string is already pascal case
-  if (!inputString.match(/\s+/g) && inputString.match(/^[A-Z]/g)) {
-    return inputString;
+  // Check if string is already camel case or pascal case
+  if (!inputString.match(/\s+/g)) {
+    // Check if string is already pascal case
+    if (inputString.charAt(0).match(/^[A-Z]/g)) {
+      return inputString;
+    }
+
+    // Check if string is already camel case
+    if (inputString.charAt(0).match(/^[a-z]/g)) {
+      return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+    }
   }
 
   return inputString
