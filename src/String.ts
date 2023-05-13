@@ -156,11 +156,18 @@ String.prototype.toCamelCase = function () {
     .replace(/[^\w\-_\s]/g, '')
     .replace(/[\-_]+/g, ' ');
 
-  // Check if string is already camel case
+  // Check if string is already camel case or pascal case
   if (!inputString.match(/\s+/g)) {
-    if (inputString.match(/^[a-z]/g)) {
+    // Check if string is already camel case
+    if (inputString.charAt(0).match(/^[a-z]/g)) {
       return inputString;
     }
+
+    // Check if string is already pascal case
+    if (inputString.charAt(0).match(/^[A-Z]/g)) {
+      return inputString.charAt(0).toLowerCase() + inputString.slice(1);
+    }
+
     return inputString.toLowerCase();
   }
 
