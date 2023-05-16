@@ -19,6 +19,7 @@ declare global {
     reverse: () => string;
     toSentenceCase: () => string;
     toKebabCase: () => string;
+    toSnakeCase: () => string;
     toPascalCase: () => string;
     toCamelCase: () => string;
     replaceAt: (
@@ -215,6 +216,13 @@ String.prototype.toKebabCase = function () {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, '-');
+};
+
+/**
+ * Converts string to snake_case.
+ */
+String.prototype.toSnakeCase = function () {
+  return this.toKebabCase().replace(/-/g, '_');
 };
 
 String.prototype.replaceAt = function (
