@@ -173,7 +173,10 @@ String.prototype.toCamelCase = function () {
     }
 
     // Check if string is already pascal case
-    if (inputString.charAt(0).match(/^[A-Z]/g)) {
+    if (
+      !inputString.match(/^[A-Z]+$/g) &&
+      inputString.charAt(0).match(/^[A-Z]/g)
+    ) {
       return inputString.charAt(0).toLowerCase() + inputString.slice(1);
     }
 
