@@ -32,4 +32,12 @@ describe('toCamelCase', () => {
 
     expect(actualOutput).toBe(expectedOutput);
   });
+
+  it('should convert all leading uppercase letters to lower case', () => {
+    const input = 'REQs';
+    const expectedOutput = 'reqs';
+    const actualOutput = input.toCamelCase();
+
+    expect(actualOutput).toBe(expectedOutput);
+  });
 });

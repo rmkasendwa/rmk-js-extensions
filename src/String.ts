@@ -177,7 +177,7 @@ String.prototype.toCamelCase = function () {
       !inputString.match(/^[A-Z]+$/g) &&
       inputString.charAt(0).match(/^[A-Z]/g)
     ) {
-      return inputString.charAt(0).toLowerCase() + inputString.slice(1);
+      return inputString.replace(/^[A-Z]+/g, (match) => match.toLowerCase());
     }
 
     return inputString.toLowerCase();
@@ -193,7 +193,7 @@ String.prototype.toCamelCase = function () {
     })
     .join(' ')
     .toPascalCase();
-  return pascalCaseString.charAt(0).toLowerCase() + pascalCaseString.slice(1);
+  return pascalCaseString.replace(/^[A-Z]+/g, (match) => match.toLowerCase());
 };
 
 /**
