@@ -248,19 +248,25 @@ String.prototype.insertAt = function (index = 0, insertion = '') {
 };
 
 String.prototype.trimIndent = function () {
-  const minIndent = this.trim()
-    .split('\n')
-    .reduce((minIndent, line) => {
-      const lineIndent = line.match(/^(\s*)/)?.[0].length || 0;
-      return lineIndent > 0 && lineIndent < minIndent ? lineIndent : minIndent;
-    }, Infinity);
-  return this.trim()
-    .split('\n')
+  const lines = this.split('\n').filter((line) => {
+    return line.length > 0;
+  });
+  const minIndent = Math.min(
+    ...lines
+      .map((line) => {
+        if (line.trim().length > 0) {
+          return line.match(/^(\s*)/)?.[0].length || 0;
+        }
+        return 0;
+      })
+      .filter((indent) => indent > 0)
+  );
+  return lines
     .map((line) => {
       if (line.trim().length > 0) {
         return line.replace(new RegExp(`^\\s{${minIndent}}`), '');
       }
-      return line;
+      return line.trim();
     })
     .join('\n');
 };
