@@ -248,9 +248,17 @@ String.prototype.insertAt = function (index = 0, insertion = '') {
 };
 
 String.prototype.trimIndent = function () {
-  const lines = this.split('\n').filter((line) => {
-    return line.length > 0;
-  });
+  const lines = this.split('\n');
+
+  //#region Remove empty lines from start and end
+  while (lines.length > 0 && lines[0].trim().length === 0) {
+    lines.shift();
+  }
+  while (lines.length > 0 && lines[lines.length - 1].trim().length === 0) {
+    lines.pop();
+  }
+  //#endregion
+
   const minIndent = Math.min(
     ...lines
       .map((line) => {
