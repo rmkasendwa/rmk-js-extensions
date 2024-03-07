@@ -24,18 +24,14 @@
   "scripts": {
     "prebuild": "rm -rf lib",
     "build": "npm run build:commonjs && npm run build:esm",
+    "postbuild": "node ./scripts/postbuild",
     "build:commonjs": "tsc && copy-and-watch src/**/*.{png,jpg,css,scss,sass,json} lib",
     "build:esm": "tsc --project tsconfig-esm.compile.json && copy-and-watch src/**/*.{png,jpg,css,scss,sass,json} lib",
-    "postbuild": "node ./scripts/postbuild",
     "eslint": "eslint --fix",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,html,htm,json,css,scss,md}\"",
-    "postinstall": "npm run prepare",
     "prepare": "husky install",
     "publish": "npm run build && npm publish ./lib/ --access=public",
-    "start": "concurrently --names \"Typescript,Assets\" -c \"blue.bold,magenta.bold\" \"tsc -w\" \"copy-and-watch --watch src/**/*.{png,jpg,css,scss,sass,json} lib\"",
-    "test": "jest",
-    "test:watch": "react-scripts test",
-    "tsc": "tsc"
+    "test": "jest"
   },
   "browserslist": {
     "production": [
@@ -107,10 +103,5 @@
       "style": "module",
       "parser": "typescript"
     }
-  },
-  "dependencies": {
-    "crypto-js": ">=4.1.1",
-    "date-fns": ">=2.29.3",
-    "lodash": ">=4.17.21"
   }
 }

@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="2.921">
-  <testsuite name="toCamelCase" errors="0" failures="0" skipped="0" timestamp="2023-07-03T14:04:00" time="2.741" tests="5">
-    <testcase classname="toCamelCase should convert space-separated string to camel case" name="toCamelCase should convert space-separated string to camel case" time="0.003">
+<testsuites name="jest tests" tests="10" failures="0" errors="0" time="3.255">
+  <testsuite name="toCamelCase" errors="0" failures="0" skipped="0" timestamp="2024-03-07T19:13:38" time="2.989" tests="10">
+    <testcase classname="toCamelCase should convert space-separated string to camel case" name="toCamelCase should convert space-separated string to camel case" time="0.004">
     </testcase>
-    <testcase classname="toCamelCase should convert multi-word string with special characters to camel case" name="toCamelCase should convert multi-word string with special characters to camel case" time="0.001">
+    <testcase classname="toCamelCase should convert multi-word string with special characters to camel case" name="toCamelCase should convert multi-word string with special characters to camel case" time="0">
     </testcase>
-    <testcase classname="toCamelCase should return an empty string for an empty input" name="toCamelCase should return an empty string for an empty input" time="0.001">
+    <testcase classname="toCamelCase should return an empty string for an empty input" name="toCamelCase should return an empty string for an empty input" time="0">
     </testcase>
     <testcase classname="toCamelCase should detect sub strings that are already camel case" name="toCamelCase should detect sub strings that are already camel case" time="0">
     </testcase>
     <testcase classname="toCamelCase should convert all leading uppercase letters to lower case" name="toCamelCase should convert all leading uppercase letters to lower case" time="0.001">
+    </testcase>
+    <testcase classname="toKebebCase should convert space-separated string to kebab case" name="toKebebCase should convert space-separated string to kebab case" time="0.001">
+    </testcase>
+    <testcase classname="toKebebCase should convert multi-word string with special characters to kebab case" name="toKebebCase should convert multi-word string with special characters to kebab case" time="0">
+    </testcase>
+    <testcase classname="toKebebCase should return an empty string for an empty input" name="toKebebCase should return an empty string for an empty input" time="0">
+    </testcase>
+    <testcase classname="toKebebCase should detect sub strings that are already kebab case" name="toKebebCase should detect sub strings that are already kebab case" time="0">
+    </testcase>
+    <testcase classname="toKebebCase should convert all leading uppercase letters to lower case" name="toKebebCase should convert all leading uppercase letters to lower case" time="0">
     </testcase>
   </testsuite>
 </testsuites>

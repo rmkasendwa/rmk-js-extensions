@@ -17,10 +17,30 @@ declare global {
       indexChunkLength?: number
     ) => string | string[] | number | number[];
     reverse: () => string;
+
+    /**
+     * Converts string to Sentence case.
+     */
     toSentenceCase: () => string;
+
+    /**
+     * Converts string to kebab-case.
+     */
     toKebabCase: () => string;
+
+    /**
+     * Converts string to snake_case.
+     */
     toSnakeCase: () => string;
+
+    /**
+     * Converts string to PascalCase
+     */
     toPascalCase: () => string;
+
+    /**
+     * Converts string to camelCase.
+     */
     toCamelCase: () => string;
     replaceAt: (
       startIndex?: number,
@@ -124,9 +144,6 @@ String.prototype.reverse = function () {
   return this.split('').reverse().join('');
 };
 
-/**
- * Converts string to PascalCase
- */
 String.prototype.toPascalCase = function () {
   const inputString = String(this)
     .replace(/[^\w\-_\s]/g, '')
@@ -157,9 +174,6 @@ String.prototype.toPascalCase = function () {
     .join('');
 };
 
-/**
- * Converts string to camelCase.
- */
 String.prototype.toCamelCase = function () {
   const inputString = String(this)
     .replace(/[^\w\-_\s]/g, '')
@@ -196,9 +210,6 @@ String.prototype.toCamelCase = function () {
   return pascalCaseString.replace(/^[A-Z]+/g, (match) => match.toLowerCase());
 };
 
-/**
- * Converts string to Sentence case.
- */
 String.prototype.toSentenceCase = function () {
   return String(this)
     .split(/\.\s*/g)
@@ -209,21 +220,16 @@ String.prototype.toSentenceCase = function () {
     .replace(/\s\./g, '.');
 };
 
-/**
- * Converts string to kebab-case.
- */
 String.prototype.toKebabCase = function () {
   return String(this)
     .replace(/[^\w\-_\s]/g, '')
     .replace(/[\-_]+/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // add space between camelCase/PascalCase text
     .trim()
     .toLowerCase()
     .replace(/\s+/g, '-');
 };
 
-/**
- * Converts string to snake_case.
- */
 String.prototype.toSnakeCase = function () {
   return this.toKebabCase().replace(/-/g, '_');
 };
