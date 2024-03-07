@@ -1,10 +1,64 @@
+/**
+ * Extends the functionality of the built-in String object by adding custom methods.
+ */
 declare global {
   interface String {
+    /**
+     * Converts string to title case.
+     * @param isUnderscoreSeparated Specifies whether the string is underscore-separated (optional).
+     * @returns The string converted to title case.
+     * @example
+     * 'hello world'.toTitleCase(); // Output: 'Hello World'
+     * 'hello_world'.toTitleCase(true); // Output: 'Hello World'
+     */
     toTitleCase: (isUnderscoreSeparated?: boolean) => string;
+
+    /**
+     * Checks if the string is in title case.
+     * @returns True if the string is in title case, false otherwise.
+     * @example
+     * 'Hello World'.isTitleCase(); // Output: true
+     * 'hello World'.isTitleCase(); // Output: false
+     */
     isTitleCase: () => boolean;
+
+    /**
+     * Checks if the string is in uppercase.
+     * @returns True if the string is in uppercase, false otherwise.
+     * @example
+     * 'HELLO WORLD'.isUpperCase(); // Output: true
+     * 'Hello World'.isUpperCase(); // Output: false
+     */
     isUpperCase: () => boolean;
+
+    /**
+     * Checks if the string is in lowercase.
+     * @returns True if the string is in lowercase, false otherwise.
+     * @example
+     * 'hello world'.isLowerCase(); // Output: true
+     * 'Hello World'.isLowerCase(); // Output: false
+     */
     isLowerCase: () => boolean;
+
+    /**
+     * Checks if the string contains a specified substring.
+     * @param string The substring to search for.
+     * @returns True if the string contains the specified substring, false otherwise.
+     * @example
+     * 'hello world'.contains('world'); // Output: true
+     * 'hello world'.contains('universe'); // Output: false
+     */
     contains: (string: string) => boolean;
+
+    /**
+     * Splits the string into chunks based on the provided configuration.
+     * @param config The configuration object for chunking.
+     * @param indexChunkLength The length of the index chunk (optional).
+     * @returns The chunked string or an array of chunks.
+     * @example
+     * 'hello world'.chunk(3); // Output: ['hel', 'lo ', 'wor', 'ld']
+     * 'hello world'.chunk({ numberOfChunks: 3 }); // Output: ['hel', 'lo ', 'world']
+     */
     chunk: (
       config:
         | number
@@ -16,38 +70,86 @@ declare global {
           },
       indexChunkLength?: number
     ) => string | string[] | number | number[];
+
+    /**
+     * Reverses the characters in the string.
+     * @returns The reversed string.
+     * @example
+     * 'hello world'.reverse(); // Output: 'dlrow olleh'
+     */
     reverse: () => string;
 
     /**
      * Converts string to Sentence case.
+     * @returns The string converted to Sentence case.
+     * @example
+     * 'hello world.'.toSentenceCase(); // Output: 'Hello world.'
      */
     toSentenceCase: () => string;
 
     /**
      * Converts string to kebab-case.
+     * @returns The string converted to kebab-case.
+     * @example
+     * 'hello world'.toKebabCase(); // Output: 'hello-world'
      */
     toKebabCase: () => string;
 
     /**
      * Converts string to snake_case.
+     * @returns The string converted to snake_case.
+     * @example
+     * 'hello world'.toSnakeCase(); // Output: 'hello_world'
      */
     toSnakeCase: () => string;
 
     /**
-     * Converts string to PascalCase
+     * Converts string to PascalCase.
+     * @returns The string converted to PascalCase.
+     * @example
+     * 'hello world'.toPascalCase(); // Output: 'HelloWorld'
      */
     toPascalCase: () => string;
 
     /**
      * Converts string to camelCase.
+     * @returns The string converted to camelCase.
+     * @example
+     * 'hello world'.toCamelCase(); // Output: 'helloWorld'
      */
     toCamelCase: () => string;
+
+    /**
+     * Replaces characters in the string within a specified range.
+     * @param startIndex The start index of the range to replace (default is 0).
+     * @param replacement The replacement string or length.
+     * @param endIndex The end index of the range to replace (default is 0).
+     * @returns The string with replaced characters.
+     * @example
+     * 'hello world'.replaceAt(6, 'Earth'); // Output: 'hello Earth'
+     */
     replaceAt: (
       startIndex?: number,
-      replacement?: string,
+      replacement?: string | number,
       endIndex?: number
     ) => string;
+
+    /**
+     * Inserts a string at a specified index in the original string.
+     * @param index The index at which to insert the string (default is 0).
+     * @param insertion The string to insert.
+     * @returns The modified string with the insertion.
+     * @example
+     * 'hello'.insertAt(2, 'world'); // Output: 'heworldllo'
+     */
     insertAt: (index?: number, insertion?: string) => string;
+
+    /**
+     * Trims the leading whitespace from each line in the string.
+     * @returns The string with leading whitespace removed from each line.
+     * @example
+     * '   hello\n   world\n'.trimIndent(); // Output: 'hello\nworld\n'
+     */
     trimIndent: () => string;
   }
 }
